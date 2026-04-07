@@ -5,7 +5,7 @@ import Sidebar from './components/Sidebar';
 import DoctorCard from './components/DoctorCard';
 import AppointmentList from './components/AppointmentList';
 
-const API_BASE = 'http://localhost:8080/api';
+const API_BASE = 'http://localhost:8123/api';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
