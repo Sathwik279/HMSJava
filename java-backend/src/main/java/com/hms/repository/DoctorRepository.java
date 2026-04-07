@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
@@ -17,4 +18,6 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
     @Query("SELECT d FROM Doctor d WHERE d.mode = :mode AND d.specialization = :specialization")
     List<Doctor> findByModeAndSpecialization(@Param("mode") Doctor.Mode mode, @Param("specialization") Doctor.Specialization specialization);
+
+    Optional<Doctor> findByUserId(Long userId);
 }

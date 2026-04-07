@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api/appointments")
 public class AppointmentController {
 
@@ -34,5 +35,10 @@ public class AppointmentController {
     @GetMapping("/doctor/{doctorId}")
     public List<Appointment> getAppointmentsByDoctor(@PathVariable Long doctorId) {
         return appointmentService.getAppointmentsByDoctor(doctorId);
+    }
+
+    @DeleteMapping("/{id}")
+    public void cancelAppointment(@PathVariable Long id) {
+        appointmentService.cancelAppointment(id);
     }
 }

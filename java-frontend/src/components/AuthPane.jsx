@@ -6,6 +6,7 @@ const AuthPane = ({ onLogin, onSignup, authMessage }) => {
   // Login state
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
+  const [loginRole, setLoginRole] = useState('patient');
 
   // Signup state
   const [signupRole, setSignupRole] = useState('patient');
@@ -23,7 +24,7 @@ const AuthPane = ({ onLogin, onSignup, authMessage }) => {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    onLogin({ username: loginUsername, password: loginPassword });
+    onLogin({ username: loginUsername, password: loginPassword, role: loginRole });
   };
 
   const handleSignupSubmit = (e) => {
@@ -86,6 +87,13 @@ const AuthPane = ({ onLogin, onSignup, authMessage }) => {
 
         {isLogin ? (
           <form onSubmit={handleLoginSubmit}>
+            <div className="form-group">
+              <label>Login as</label>
+              <select value={loginRole} onChange={(e) => setLoginRole(e.target.value)}>
+                <option value="patient">Patient</option>
+                <option value="doctor">Doctor</option>
+              </select>
+            </div>
             <div className="form-group">
               <label>Username</label>
               <input 
@@ -152,6 +160,17 @@ const AuthPane = ({ onLogin, onSignup, authMessage }) => {
                       <option value="OPHTHALMOLOGY">Ophthalmology</option>
                       <option value="PAEDIATRICS">Paediatrics</option>
                       <option value="GYNAECOLOGY">Gynaecology</option>
+                      <option value="CARDIOLOGY">Cardiology</option>
+                      <option value="DERMATOLOGY">Dermatology</option>
+                      <option value="NEUROLOGY">Neurology</option>
+                      <option value="ORTHOPAEDICS">Orthopaedics</option>
+                      <option value="PSYCHIATRY">Psychiatry</option>
+                      <option value="GASTROENTEROLOGY">Gastroenterology</option>
+                      <option value="UROLOGY">Urology</option>
+                      <option value="GENERAL_SURGERY">General Surgery</option>
+                      <option value="ENT">ENT</option>
+                      <option value="DENTISTRY">Dentistry</option>
+                      <option value="RADIOLOGY">Radiology</option>
                     </select>
                   </div>
                   <div className="form-group">

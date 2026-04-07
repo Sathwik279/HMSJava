@@ -1,4 +1,4 @@
-const AppointmentList = ({ appointments, role }) => {
+const AppointmentList = ({ appointments, role, onCancel }) => {
   if (!appointments || appointments.length === 0) {
     return (
       <div className="glass card animate-in" style={{ textAlign: 'center', padding: '3rem' }}>
@@ -16,6 +16,7 @@ const AppointmentList = ({ appointments, role }) => {
             <th style={{ padding: '1rem', color: 'var(--text-muted)' }}>Date</th>
             <th style={{ padding: '1rem', color: 'var(--text-muted)' }}>Time</th>
             <th style={{ padding: '1rem', color: 'var(--text-muted)' }}>Status</th>
+            {role === 'patient' && <th style={{ padding: '1rem', color: 'var(--text-muted)' }}>Action</th>}
           </tr>
         </thead>
         <tbody>
@@ -29,6 +30,22 @@ const AppointmentList = ({ appointments, role }) => {
                   {app.status}
                 </span>
               </td>
+              {role === 'patient' && (
+                <td style={{ padding: '1rem' }}>
+                  <button 
+                    className="btn btn-outline" 
+                    style={{ 
+                      padding: '0.25rem 0.75rem', 
+                      fontSize: '0.75rem', 
+                      borderColor: '#ef4444', 
+                      color: '#ef4444' 
+                    }}
+                    onClick={() => onCancel(app.id)}
+                  >
+                    Cancel
+                  </button>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

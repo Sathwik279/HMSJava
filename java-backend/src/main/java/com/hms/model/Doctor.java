@@ -21,6 +21,7 @@ public class Doctor {
 
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(length = 50)
     private Specialization specialization;
 
     @NotBlank
@@ -52,7 +53,11 @@ public class Doctor {
     private LocalTime endTime; // Default availability end
 
     public enum Specialization {
-        OPHTHALMOLOGY, PAEDIATRICS, GYNAECOLOGY
+        OPHTHALMOLOGY, PAEDIATRICS, GYNAECOLOGY,
+        CARDIOLOGY, DERMATOLOGY, NEUROLOGY,
+        ORTHOPAEDICS, PSYCHIATRY, GASTROENTEROLOGY,
+        UROLOGY, GENERAL_SURGERY, ENT,
+        DENTISTRY, RADIOLOGY
     }
 
     public enum Mode {

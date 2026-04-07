@@ -94,8 +94,22 @@ public class AuthController {
         Optional<User> userOpt = userRepository.findByUsername(request.getUsername());
         if (userOpt.isPresent() && PASSWORD_ENCODER.matches(request.getPassword(), userOpt.get().getPasswordHash())) {
             User user = userOpt.get();
+            
+            // Validate requested role matches the user's role
+            if (request.getRole() != null && !request.getRole().equalsIgnoreCase(user.getRole())) {
+                return ResponseEntity.status(403).body(Map.of("error", "Incorrect role for this account"));
+            }
+
+            Long profileId = null;
+            if ("doctor".equals(user.getRole())) {
+                profileId = doctorRepository.findByUserId(user.getId()).map(Doctor::getId).orElse(null);
+            } else if ("patient".equals(user.getRole())) {
+                profileId = patientRepository.findByUserId(user.getId()).map(Patient::getId).orElse(null);
+            }
+
             return ResponseEntity.ok(Map.of(
                 "userId", user.getId(),
+                "profileId", profileId != null ? profileId : user.getId(),
                 "role", user.getRole(),
                 "username", user.getUsername()
             ));

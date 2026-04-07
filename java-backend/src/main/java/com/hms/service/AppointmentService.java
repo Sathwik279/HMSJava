@@ -58,4 +58,8 @@ public class AppointmentService {
     public List<Appointment> getAppointmentsByDoctor(Long doctorId) {
         return appointmentRepository.findByDoctorId(doctorId);
     }
+
+    public void cancelAppointment(Long appointmentId) {
+        appointmentRepository.deleteById(appointmentId);
+    }
 }
